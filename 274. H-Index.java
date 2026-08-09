@@ -6,7 +6,6 @@ class Solution {
         for (int citation : citations) {
             citationBuckets[Math.min(citation, papers)]++;
         }
-
         int cumulativePapers = 0;
         for (int hIndex = papers; hIndex >= 0; hIndex--) {
             cumulativePapers += citationBuckets[hIndex];
