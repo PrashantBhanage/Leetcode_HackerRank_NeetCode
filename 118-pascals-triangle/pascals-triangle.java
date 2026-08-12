@@ -13,7 +13,7 @@ class Solution {
             ///The middle exist only when i>1
             //SO we need to look at prev rows
             if(i>1){
-                List<Integer> prevrow = triangle.get(i-1);
+                List<Integer> prevrow = triangle.get(i-1);//Gives the previous row and store it in prevrow."
                 for(int j = 1;j<i; j++){
                     /*
                     For:
@@ -43,7 +43,7 @@ class Solution {
                     row.add(value);
                 }
             }
-        if(i>0){
+        if(i>0){//If this isn't the first row, add the ending 1.
             row.add(1);
         }
         triangle.add(row);
