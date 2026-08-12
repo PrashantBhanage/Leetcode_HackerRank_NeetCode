@@ -1,40 +1,53 @@
 class Solution {
     public List<List<Integer>> generate(int numRows) {
-        if (numRows == 0) {
-            return new ArrayList<>();
-        }
-        if (numRows == 1) {
-            List<List<Integer>> result = new ArrayList<>();
-            result.add(Arrays.asList(1));
-            return result;
-        }
         
-        // ==========================================
-        // BLOCK 2: THE DEEP DIVE (THE RECURSIVE CALL)
-        // ==========================================
-        List<List<Integer>> prevRows = generate(numRows - 1);
-        
-        // ==========================================
-        // BLOCK 3: BUILD THE DRAFT ROW (ALL ONES)
-        // ==========================================
-        List<Integer> newRow = new ArrayList<>();
-        for (int i = 0; i < numRows; i++) {
-            newRow.add(1);
+
+        //create the triangle first
+
+        List<List<Integer>> triangle = new ArrayList<>();
+
+        for(int i = 0; i<numRows; i++){
+            List<Integer> row = new ArrayList<>();
+            row.add(1);
+
+            ///The middle exist only when i>1
+            //SO we need to look at prev rows
+            if(i>1){
+                List<Integer> prevrow = triangle.get(i-1);
+                for(int j = 1;j<i; j++){
+                    /*
+                    For:
+
+                    previousRow = [1, 3, 3, 1]
+
+                    When j = 1:
+
+                    previousRow[0] + previousRow[1]
+                    = 1 + 3
+                    = 4
+
+                    When j = 2:
+
+                    previousRow[1] + previousRow[2]
+                    = 3 + 3
+                    = 6
+
+                    When j = 3:
+
+                    previousRow[2] + previousRow[3]
+                    = 3 + 1
+                    = 4 
+                    */
+
+                    int value= prevrow.get(j-1)+prevrow.get(j);
+                    row.add(value);
+                }
+            }
+        if(i>0){
+            row.add(1);
         }
-        
-        // ==========================================
-        // BLOCK 4: FIX THE MIDDLE NUMBERS
-        // ==========================================
-        for (int i = 1; i < numRows - 1; i++) {
-            int leftAbove = prevRows.get(numRows - 2).get(i - 1);
-            int rightAbove = prevRows.get(numRows - 2).get(i);
-            newRow.set(i, leftAbove + rightAbove);
+        triangle.add(row);
         }
-        
-        // ==========================================
-        // BLOCK 5: COMBINE AND RETURN
-        // ==========================================
-        prevRows.add(newRow);
-        return prevRows;
+        return  triangle;
     }
 }
