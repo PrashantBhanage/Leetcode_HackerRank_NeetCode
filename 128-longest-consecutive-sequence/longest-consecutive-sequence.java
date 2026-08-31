@@ -6,7 +6,7 @@ class Solution {
 
         Arrays.sort(nums); // sort ts
         
-        int count = 1; //start count from 1
+        int count = 1; //start counting from 1
         int maxcount = 1;
 
         for(int i = 1; i<nums.length; i++){
