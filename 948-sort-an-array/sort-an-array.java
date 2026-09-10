@@ -1,70 +1,60 @@
 class Solution {
     public int[] sortArray(int[] nums) {
-        mergeSort(nums, 0,  nums.length-1);
+        mergeSort(nums, 0,  nums.length-1); //mergeSort() divides the array
         return nums;
     }
 
-    //2. recursive function to divide the array
-    private void mergeSort(int[] nums, int l, int r){
-        if(l<r){
-            //find the middle point
-            int mid = l + (r-l)/2;
-
-            //Divide. Sort first and second halves
+    public void mergeSort(int[] nums,int l,int h){
+        if(l<h){
+            int mid = (l+h)/2;
+            //sort left  half
             mergeSort(nums,l,mid);
-            mergeSort(nums, mid+1, r);
 
-            //Conquer & combine. Merge the sorted halves
-            merge(nums,l,mid,r);
+            //sort right half
+            mergeSort(nums,mid+1,h);
+
+            //now merge both sorted arrays
+            merge(nums,l,mid,h);
         }
     }
-    //3. The helper fucntion to combine the sorte pieces
-    private void merge(int[] nums, int l, int mid, int r){
-        int n1 = mid-l+1;
-        int n2 = r-mid;
 
-        //create temporary arrays
-        int[] leftArray = new int[n1];
-        int[] rightArray = new int[n2];
+    public void merge(int[] nums, int l,int mid,int h){
+        int i = l;
+        int j = mid+1;
+        int k = 0;
 
-        //copy data to temp arrays
-
-        for(int i = 0; i<n1; i++){
-            leftArray[i] = nums[l+i];
-        }
-        for(int j=0; j<n2; j++){
-            rightArray[j] = nums[mid+1+j];
-        }
-
-        //merge the temp arrays back into org nums[]
-        int i = 0, j = 0;
-        int k = l;
-
-        while(i<n1 && j<n2){
-            if(leftArray[i] <= rightArray[j]){
-                nums[k] = leftArray[i];
+        //compare elements from both halves
+        int[] temp = new int[h - l + 1];
+        while(i<=mid && j<=h){
+            if(nums[i]<=nums[j]){
+                temp[k] = nums[i];
                 i++;
-            }else{
-                nums[k] = rightArray[j];
+            }
+            else{
+                temp[k] = nums[j];
                 j++;
             }
             k++;
         }
 
-        //copy remaining elements of leftArray[] if any  
-        while(i<n1){
-            nums[k] = leftArray[i];
+        //copy remaining elements from left half
+        while(i<=mid){
+            temp[k] = nums[i];
             i++;
             k++;
         }
-        //copy remaining elements of RightArray[] if any
 
-        while(j<n2){
-            nums[k] = rightArray[j];
+        //copy remaining ele from right
+        while(j<=h){
+            temp[k] = nums[j];
             j++;
             k++;
         }
 
+        //copy temp back to nums
+        for(i = l, k=0; i <= h; i++, k++){
+            nums[i] = temp[k];
+        }
     }
 
 }
