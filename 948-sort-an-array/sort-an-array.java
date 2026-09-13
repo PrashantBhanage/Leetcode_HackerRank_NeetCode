@@ -37,7 +37,7 @@ class Solution {
             k++;
         }
 
-        //copy remaining elements from left half
+        ////copy remaining elements from left half
         while(i<=mid){
             temp[k] = nums[i];
             i++;
