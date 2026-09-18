@@ -10,7 +10,7 @@ class Solution {
             //sort left  half
             mergeSort(nums,l,mid);
 
-            //sort right half
+            //sort right half//
             mergeSort(nums,mid+1,h);
 
             //now merge both sorted arrays
@@ -22,8 +22,8 @@ class Solution {
         int i = l;
         int j = mid+1;
         int k = 0;
-//
-        //compare elements from both halves
+
+        ////compare elements from both halves
         int[] temp = new int[h - l + 1];
         while(i<=mid && j<=h){
             if(nums[i]<=nums[j]){
