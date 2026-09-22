@@ -11,7 +11,7 @@ class Solution {
         int[] result = new int[k];
         int index = 0;
 
-        // Find top k
+        // Find top k//
         for (int j = 0; j < k; j++) {
 
             int maxFrequency = 0;
@@ -30,7 +30,7 @@ class Solution {
 
             map.remove(maxNumber);
         }
-
+////return
         return result;
     }
 }
